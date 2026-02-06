@@ -8,7 +8,7 @@ const app = express();
 
 Routes(app);
 
-app.listen(3000, () => {
-  console.log("Server running");
-});
+// app.listen(3000, () => {
+//   console.log("Server running");
+// });
 module.exports = { app };
