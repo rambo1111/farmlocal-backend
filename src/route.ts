@@ -9,7 +9,7 @@ export function Routes(app: Express) {
     res.json({ status: "ok" });
   });
 
-  app.get("/products", fetchproducts);
+  // app.get("/products", fetchproducts);
   app.post("/webhooks/supplier", supplierWebhook);
   app.get("/products", limit, fetchproducts);
 
