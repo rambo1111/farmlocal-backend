@@ -84,7 +84,7 @@ export async function getAccessToken(): Promise<string> {
   }
 
   try {
-    constPX = await axios.post<TokenResponse>(
+    const res = await axios.post<TokenResponse>(
       process.env.OAUTH_TOKEN_URL!,
       {
         grant_type: "client_credentials",
