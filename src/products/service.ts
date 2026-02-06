@@ -21,7 +21,7 @@ export async function loadProducts(
     return JSON.parse(cached);
   }
 
-  const products = await fetchitems(limit, cursor);
+  const products = await fetchitems({ limit, cursor });
 
   const nextCursor =
     products.length > 0 ? products[products.length - 1].id : null;
