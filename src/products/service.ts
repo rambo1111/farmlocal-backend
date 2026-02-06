@@ -57,7 +57,7 @@ export async function loadProducts(query: any) { // using 'any' or the interface
 
   const cached = await redis.get(cacheKey);
   if (cached) {
-    return JSON.parse(cached);
+    return JSON.parse(cached.toString());
   }
 
   // FIX: Pass the single 'query' object instead of separate arguments
