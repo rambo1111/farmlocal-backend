@@ -50,19 +50,17 @@ interface ProductQuery {
   category?: string;
 }
 
-// FIX: Change arguments to accept the full query object
-export async function loadProducts(query: ProductQuery) {
+export async function loadProducts(query: any) { // using 'any' or the interface to simplify
   const { limit, cursor, search, category, sort, order } = query;
 
-  // FIX: Include search/category in cache key so filtered results don't mix with normal ones
-  const cacheKey = `products:limit:${limit}:cursor:${cursor ?? 0}:search:${search || ""}:cat:${category || ""}:sort:${sort || ""}`;
+  const cacheKey = `products:limit:${limit}:cursor:${cursor ?? 0}:search:${search || ""}:cat:${category || ""}`;
 
   const cached = await redis.get(cacheKey);
   if (cached) {
     return JSON.parse(cached);
   }
 
-  // FIX: Pass the full query object to the repository
+  // FIX: Pass the single 'query' object instead of separate arguments
   const products = await fetchitems(query);
 
   const nextCursor =
@@ -79,5 +77,3 @@ export async function loadProducts(query: ProductQuery) {
 
   return response;
 }
-
-
